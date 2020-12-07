@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
+import router from '../router';
 
 const inboxState = {
   namespaced: true,
@@ -83,6 +84,7 @@ const inboxState = {
       // check if login success
       if (res.status === 200) {
         context.dispatch('GetMessages');
+        router.push('/mail/sent');
         return;
       }
 
