@@ -3,7 +3,7 @@ package main
 import (
 	"io"
 	"io/ioutil"
-	// "fmt"
+	"fmt"
 	"net/http"
 	"errors"
 	"encoding/json"
@@ -59,10 +59,11 @@ func HandleGetDetailInbox(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     seqid := 0
     // fmt.Println(len(envelopes))
+    fmt.Println(vars["id"])
     for i, enve := range envelopes {
-    	// fmt.Println(i, enve.MessageId)
+    	fmt.Println(i, enve.MessageId)
     	if enve.MessageId == vars["id"] {
-    		seqid = i
+    		seqid = i + 1
     		break
     	}
     }
@@ -107,7 +108,7 @@ func GetAllInbox(c *client.Client) ([]Envelope, error) {
 
 func GetDetailInbox(c *client.Client, seqid uint32) (*Mail, error) {
 	seqSet := new(imap.SeqSet)
-	seqSet.AddNum(seqid + 1)
+	seqSet.AddNum(seqid)
 
 	var section imap.BodySectionName
 	items := []imap.FetchItem{section.FetchItem()}
