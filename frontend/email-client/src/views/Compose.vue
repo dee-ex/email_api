@@ -3,10 +3,13 @@
     <div class="compose-header">
       <h1>Compose Mail</h1>
     </div>
+    <div class="compose-error-msg" v-if="sendingErrorMsg">
+      {{ sendingErrorMsg }}
+    </div>
     <div class="compose-form">
       <input v-model="to" type="email" id="to-inp" name="to" placeholder="To" />
       <input v-model="subject" type="text" id="subject-inp" name="subject" placeholder="Subject" />
-      <textarea v-model="content" id="content-inp" name="content" placeholder="Content" rows="25" />
+      <textarea v-model="content" id="content-inp" name="content" placeholder="Content" rows="20" />
       <div class="send-btn">
         <button @click="sendEmail">Send</button>
       </div>
@@ -17,7 +20,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex';
 
-const { mapActions } = createNamespacedHelpers('inbox');
+const { mapActions, mapGetters } = createNamespacedHelpers('inbox');
 
 export default {
   name: 'Compose',
@@ -27,6 +30,9 @@ export default {
       to: '',
       content: '',
     };
+  },
+  computed: {
+    ...mapGetters(['sendingErrorMsg']),
   },
   methods: {
     ...mapActions(['SendMessage']),
@@ -97,5 +103,11 @@ export default {
 
   .compose-form input {
     height: 45px;
+  }
+
+  .compose-error-msg {
+    color: crimson;
+    font-style: italic;
+    font-size: 1rem;
   }
 </style>

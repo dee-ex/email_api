@@ -75,20 +75,24 @@ const inboxState = {
       const password = rootGetters['auth/password'];
 
       context.commit('SetIsSending', true);
-      const res = await axios.post('http://localhost:8000/send', {
-        from,
-        password,
-        ...emailContent,
-      });
-      context.commit('SetIsSending', false);
-      // check if login success
-      if (res.status === 200) {
-        context.dispatch('GetMessages');
-        router.push('/mail/sent');
-        return;
-      }
+      try {
+        const res = await axios.post('http://localhost:8000/send', {
+          from,
+          password,
+          ...emailContent,
+        });
+        context.commit('SetIsSending', false);
+        // check if login success
+        if (res.status === 200) {
+          context.dispatch('GetMessages');
+          router.push('/mail/sent');
+          return;
+        }
 
-      context.commit('SetSendingErrorMsg', 'Unable to send email!');
+        context.commit('SetSendingErrorMsg', 'Unable to send email!');
+      } catch {
+        context.commit('SetSendingErrorMsg', 'Unable to send email!');
+      }
     },
   },
   modules: {
