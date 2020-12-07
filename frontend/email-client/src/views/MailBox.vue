@@ -1,29 +1,25 @@
 <template>
-  <div id="mail-list">
-    <h1>Inbox</h1>
+  <div id="mailbox">
+    <h1>Mailbox</h1>
     <ComposeBtn />
-    <MailSummary
-      v-for="mail in this.messages"
-      v-bind:key="mail.MessageId"
-      :subject="mail.Subject"
-      :date="mail.Date"
-      :messageId="mail.MessageId"
-      :from="mail.From[0]"
-    />
+    <div class="nav">
+      <router-link to="/mail/inbox">Inbox</router-link>
+      <span>|</span>
+      <router-link to="/mail/sent">Sent</router-link>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-import MailSummary from '../components/MailSummary.vue';
 import ComposeBtn from '../components/ComposeBtn.vue';
 
 const { mapActions, mapGetters } = createNamespacedHelpers('inbox');
 
 export default {
-  name: 'MailList',
+  name: 'MailBox',
   components: {
-    MailSummary,
     ComposeBtn,
   },
   computed: {
@@ -44,8 +40,10 @@ export default {
 };
 </script>
 
-<style>
-  #mail-list {
-    margin-top: 15px;
+<style scoped>
+  .nav span {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 </style>

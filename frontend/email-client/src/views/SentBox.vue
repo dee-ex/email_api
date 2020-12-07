@@ -1,6 +1,6 @@
 <template>
-  <div id="inbox">
-    <h1>Inbox</h1>
+  <div id="sentbox">
+    <h1>Sent</h1>
     <MailSummary
       v-for="mail in this.messages"
       v-bind:key="mail.MessageId"
@@ -8,7 +8,7 @@
       :date="mail.Date"
       :messageId="mail.MessageId"
       :from="mail.From[0]"
-      path="inbox-mail-detail"
+      path="sent-mail-detail"
     />
   </div>
 </template>
@@ -17,10 +17,10 @@
 import { createNamespacedHelpers } from 'vuex';
 import MailSummary from '../components/MailSummary.vue';
 
-const { mapActions, mapGetters } = createNamespacedHelpers('inbox');
+const { mapActions, mapGetters } = createNamespacedHelpers('sentbox');
 
 export default {
-  name: 'Inbox',
+  name: 'SentBox',
   components: {
     MailSummary,
   },

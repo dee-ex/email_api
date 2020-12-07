@@ -1,6 +1,6 @@
 <template>
   <div class="mail-summary">
-    <router-link :to="{ name: 'mail-detail', params: { id: messageId } }">
+    <router-link :to="{ name: path, params: { id: messageId } }">
       <div>
         <div class="mail-title">
           <div class="mail-subject">{{ subject || '[No subject]' }}</div>
@@ -35,6 +35,7 @@ export default {
     from: Object,
     messageId: String,
     date: String,
+    path: String,
   },
 };
 </script>

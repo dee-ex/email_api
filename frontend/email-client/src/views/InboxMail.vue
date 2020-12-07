@@ -1,8 +1,6 @@
 <template>
   <div class="mail">
-    <h1>Mail</h1>
-    <ComposeBtn />
-    <router-link to="/inbox">Back</router-link>
+    <h1>{{message.Subject}}</h1>
     <div v-html="message.Body">
       {{ message.Body }}
     </div>
@@ -11,15 +9,11 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-import ComposeBtn from '../components/ComposeBtn.vue';
 
-const { mapActions, mapGetters } = createNamespacedHelpers('message');
+const { mapActions, mapGetters } = createNamespacedHelpers('inboxmessage');
 
 export default {
-  name: 'Mail',
-  components: {
-    ComposeBtn,
-  },
+  name: 'InboxMail',
   computed: {
     ...mapGetters([
       'isLoading',

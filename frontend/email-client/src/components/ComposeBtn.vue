@@ -1,6 +1,6 @@
 <template>
   <div class="compose-btn">
-    <router-link to="/inbox/compose">Compose</router-link>
+    <router-link to="/mail/compose">Compose</router-link>
   </div>
 </template>
 

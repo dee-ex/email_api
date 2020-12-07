@@ -45,7 +45,7 @@ const authState = {
 
       if (email && password) {
         context.commit('SetLoggedIn', { email, password });
-        router.replace('inbox');
+        router.replace('mail');
         return;
       }
       // failed -> require user to login
@@ -66,7 +66,7 @@ const authState = {
         context.commit('SetLoggedIn', { email, password });
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
-        router.replace('inbox');
+        router.replace('mail');
         return;
       }
 

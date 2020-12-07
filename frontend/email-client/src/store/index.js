@@ -2,8 +2,10 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import auth from './auth';
-import message from './message';
+import inboxmessage from './inbox-message';
+import sentmessage from './sent-message';
 import inbox from './inbox';
+import sentbox from './sentbox';
 
 Vue.use(Vuex);
 
@@ -16,7 +18,9 @@ export default new Vuex.Store({
   },
   modules: {
     auth,
-    message,
+    inboxmessage,
+    sentmessage,
     inbox,
+    sentbox,
   },
 });
