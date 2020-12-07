@@ -1,4 +1,5 @@
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 const inboxState = {
   namespaced: true,
@@ -29,6 +30,7 @@ const inboxState = {
   },
   mutations: {
     SetMessages(state, messages) {
+      messages.sort((a, b) => dayjs(b.Date).diff(a.Date));
       state.messages = messages;
     },
     SetErrorMsg(state, errorMsg) {
