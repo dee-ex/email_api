@@ -2,7 +2,6 @@
   <div class="compose">
     <div class="compose-header">
       <h1>Compose Mail</h1>
-      <router-link to="/inbox">Back</router-link>
     </div>
     <div class="compose-form">
       <input v-model="to" type="email" id="to-inp" name="to" placeholder="To" />
