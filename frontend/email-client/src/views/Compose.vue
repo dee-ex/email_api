@@ -5,7 +5,7 @@
       <router-link to="/inbox">Back</router-link>
     </div>
     <div class="compose-form">
-      <input v-model="to" type="text" id="to-inp" name="to" placeholder="To" />
+      <input v-model="to" type="email" id="to-inp" name="to" placeholder="To" />
       <input v-model="subject" type="text" id="subject-inp" name="subject" placeholder="Subject" />
       <textarea v-model="content" id="content-inp" name="content" placeholder="Content" rows="25" />
       <div class="send-btn">
@@ -16,9 +16,9 @@
 </template>
 
 <script>
-// import { createNamespacedHelpers } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
 
-// const { mapActions } = createNamespacedHelpers('inbox');
+const { mapActions } = createNamespacedHelpers('inbox');
 
 export default {
   name: 'Compose',
@@ -30,9 +30,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['SendMessage']),
     sendEmail() {
-      const { subject, to, content } = this;
-      console.log({ subject, to, content });
+      const { subject, to, content: body } = this;
+      this.SendMessage({ subject, to, body });
     },
   },
 };
