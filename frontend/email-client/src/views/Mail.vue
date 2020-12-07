@@ -3,8 +3,8 @@
     <h1>Mail</h1>
     <ComposeBtn />
     <router-link to="/inbox">Back</router-link>
-    <div>
-      :)
+    <div v-html="message.Body">
+      {{ message.Body }}
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ const messageState = {
   namespaced: true,
   state: {
     isLoading: false,
-    message: null,
+    message: {},
     errorMsg: null,
   },
   getters: {
