@@ -3,7 +3,7 @@ package main
 import (
 	"io"
 	"io/ioutil"
-	"fmt"
+	// "fmt"
 	"net/http"
 	"errors"
 	"encoding/json"
@@ -58,10 +58,7 @@ func HandleGetDetailInbox(w http.ResponseWriter, r *http.Request) {
 
     vars := mux.Vars(r)
     seqid := 0
-    // fmt.Println(len(envelopes))
-    fmt.Println(vars["id"])
     for i, enve := range envelopes {
-    	fmt.Println(i, enve.MessageId)
     	if enve.MessageId == vars["id"] {
     		seqid = i + 1
     		break
