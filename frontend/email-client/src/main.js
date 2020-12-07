@@ -17,13 +17,13 @@ router.beforeEach((to, from, next) => {
 
   // prevent user to access login once logged in
   if (to.matched.some(record => record.meta.requiresLogin === 1) && store.state.auth.isLoggedIn) {
-    next('/');
+    next('/mail');
     return;
   }
 
   // prevent user to access home without logging in
   if (to.matched.some(record => record.meta.requiresLogin === 2) && !store.state.auth.isLoggedIn) {
-    next('/');
+    next('/login');
     return;
   }
 

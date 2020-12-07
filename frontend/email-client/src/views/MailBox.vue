@@ -1,7 +1,10 @@
 <template>
   <div id="mailbox">
     <h1>Mailbox</h1>
-    <ComposeBtn />
+    <div class="mail-btn-group">
+      <ComposeBtn />
+      <LogoutBtn />
+    </div>
     <div class="nav">
       <router-link to="/mail/inbox">Inbox</router-link>
       <span>|</span>
@@ -14,6 +17,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex';
 import ComposeBtn from '../components/ComposeBtn.vue';
+import LogoutBtn from '../components/LogoutBtn.vue';
 
 const { mapActions, mapGetters } = createNamespacedHelpers('inbox');
 
@@ -21,6 +25,7 @@ export default {
   name: 'MailBox',
   components: {
     ComposeBtn,
+    LogoutBtn,
   },
   computed: {
     ...mapGetters([
@@ -45,5 +50,10 @@ export default {
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;
+  }
+
+  .mail-btn-group {
+    display: flex;
+    justify-content: center;
   }
 </style>

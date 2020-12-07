@@ -25,10 +25,10 @@ const authState = {
     },
   },
   mutations: {
-    SetLoggedIn(state, { email, password }) {
+    SetLoggedIn(state, { email, password, isLoggedIn = true }) {
       state.email = email;
       state.password = password;
-      state.isLoggedIn = true;
+      state.isLoggedIn = isLoggedIn;
     },
     SetErrorMsg(state, errorMsg) {
       state.errorMsg = errorMsg;
@@ -55,22 +55,39 @@ const authState = {
     async Login(context, { email, password }) {
       context.commit('SetIsLoading', true);
       // send login request
-      const res = await axios.post('http://localhost:8000/login', {
-        username: email,
-        password,
-      });
+      try {
+        const res = await axios.post('http://localhost:8000/login', {
+          username: email,
+          password,
+        });
 
-      context.commit('SetIsLoading', false);
-      // check if login success
-      if (res.status === 200) {
-        context.commit('SetLoggedIn', { email, password });
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
-        router.replace('mail');
-        return;
+        context.commit('SetIsLoading', false);
+        // check if login success
+        if (res.status === 200) {
+          context.commit('SetLoggedIn', { email, password });
+          localStorage.setItem('email', email);
+          localStorage.setItem('password', password);
+          router.replace('mail');
+          return;
+        }
+
+        context.commit('SetErrorMsg', 'Wrong email or password!');
+      } catch {
+        context.commit('SetErrorMsg', 'Wrong email or password!');
       }
+    },
 
-      context.commit('SetErrorMsg', 'Wrong email or password!');
+    Logout(context) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      context.commit('SetLoggedIn', {
+        isLoggedIn: false,
+        email: null,
+        password: null,
+      });
+      context.commit('SetErrorMsg', '');
+      context.commit('SetIsLoading', false);
+      router.replace('/');
     },
 
   },

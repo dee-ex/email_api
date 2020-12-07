@@ -11,6 +11,9 @@
           <label for="password-inp">Password</label>
           <input name="password" id="password-inp" type="password" v-model="password" />
         </div>
+        <div class="login-error-msg" v-if="errorMsg">
+          {{ errorMsg }}
+        </div>
       </div>
       <div class="login-btn">
         <button @click="login">Login</button>
@@ -22,7 +25,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex';
 
-const { mapActions } = createNamespacedHelpers('auth');
+const { mapActions, mapGetters } = createNamespacedHelpers('auth');
 
 export default {
   name: 'Login',
@@ -31,6 +34,9 @@ export default {
       email: 'trung.nguyendx@hcmut.edu.vn',
       password: 'becomemedalist',
     };
+  },
+  computed: {
+    ...mapGetters(['errorMsg', 'isLoading']),
   },
   methods: {
     ...mapActions(['Login']),
@@ -110,6 +116,12 @@ export default {
     width: 100%;
     height: 50%;
     max-height: 480px;
+  }
+
+  .login-error-msg {
+    color: crimson;
+    font-style: italic;
+    font-size: 1rem;
   }
 
 </style>
