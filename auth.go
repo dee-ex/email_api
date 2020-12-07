@@ -23,11 +23,10 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	c, err := IMAPLogin(data.Username, data.Password)
 
 	if err != nil {
-		json.NewEncoder(w).Encode(LoginStatus{false})
+		http.Error(w, err.Error(), 400)
 		return
     }
     c.Logout()
-    json.NewEncoder(w).Encode(LoginStatus{true})  
 }
 
 func IMAPLogin(username, password string) (*client.Client, error) {

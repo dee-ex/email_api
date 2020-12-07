@@ -16,8 +16,8 @@ func StartServer() {
 	router.HandleFunc("/login", HandleLogin).Methods("POST")
 	router.HandleFunc("/mailbox/inbox", HandleGetAllInbox).Methods("POST")
 	router.HandleFunc("/mailbox/inbox/{id}", HandleGetDetailInbox).Methods("POST")
-	router.HandleFunc("/mailbox/sent", HandleGetAllSent).Methods("GET")
-	router.HandleFunc("/mailbox/sent/{id}", HandleGetDetailSent).Methods("GET")
+	router.HandleFunc("/mailbox/sent", HandleGetAllSent).Methods("POST")
+	router.HandleFunc("/mailbox/sent/{id}", HandleGetDetailSent).Methods("POST")
 	router.HandleFunc("/send", HandleSend).Methods("POST")
 
 	c := cors.New(cors.Options{

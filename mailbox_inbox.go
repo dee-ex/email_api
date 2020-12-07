@@ -61,7 +61,7 @@ func HandleGetDetailInbox(w http.ResponseWriter, r *http.Request) {
     // fmt.Println(len(envelopes))
     for i, enve := range envelopes {
     	// fmt.Println(i, enve.MessageId)
-    	if enve.MessageId[1:len(enve.MessageId)-1] == vars["id"] {
+    	if enve.MessageId == vars["id"] {
     		seqid = i
     		break
     	}
