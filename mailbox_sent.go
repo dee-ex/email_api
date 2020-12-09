@@ -78,7 +78,10 @@ func GetAllSent(c *client.Client) ([]Envelope, error) {
     done := make(chan error, 1)
     mbox, err := c.Select("[Gmail]/Sent Mail", false)
 	if err != nil {
-        return nil, err
+        mbox, err = c.Select("[Gmail]/Thư đã gửi", false)
+        if err != nil {
+        	return nil, err
+        }
 	}
 	from := uint32(1)
 	to := mbox.Messages
