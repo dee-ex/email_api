@@ -20,7 +20,7 @@ func HandleSend(w http.ResponseWriter, r *http.Request) {
 	auth := sasl.NewPlainClient("", data.From, data.Password)
 
 	msg := strings.NewReader(fmt.Sprintf("To: %s\r\nFrom: %s\r\nSubject: %s\r\n\r\n%s\r\n", data.To, data.From, data.Subject, data.Body))
-	err = smtp.SendMail("smtp.gmail.com:25", auth, data.From, []string{data.To}, msg)
+	err = smtp.SendMail("smtp.gmail.com:587", auth, data.From, []string{data.To}, msg)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return

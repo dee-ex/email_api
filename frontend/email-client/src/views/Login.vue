@@ -31,8 +31,8 @@ export default {
   name: 'Login',
   data() {
     return {
-      email: 'trung.nguyendx@hcmut.edu.vn',
-      password: 'becomemedalist',
+      email: 'vominhtrithcsdhtp1@gmail.com',
+      password: 'aA123456789aA',
     };
   },
   computed: {
